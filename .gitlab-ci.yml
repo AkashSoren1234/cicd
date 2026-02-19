@@ -1,0 +1,15 @@
+# .gitlab-ci.yml
+# This file is read by GitLab automatically on every git push.
+# It defines your CI/CD pipeline.
+
+stages:          # defines the ordered list of stages in the pipeline
+  - test         # we only have one stage; you could add "build", "deploy", etc.
+
+run-tests:                  # name of this job — you can call it anything
+  stage: test               # this job runs in the "test" stage
+  image: python:3.11-slim   # GitLab pulls this Docker image and runs commands inside it
+                            # "slim" = smaller image, faster startup
+  script:                   # list of shell commands to run, in order
+    - pip install pytest     # install the pytest library (not pre-installed in the image)
+    - pytest test_calculator.py -v
+    # ↑ -v = verbose: shows each test name and whether it passed or failed
