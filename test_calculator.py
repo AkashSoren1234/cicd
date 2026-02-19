@@ -6,7 +6,7 @@ from calculator import add, subtract, multiply, divide
 # ↑ imports our 4 functions from calculator.py (must be in the same folder)
 
 def test_add():
-    assert add(2, 3) == 5          # 2 + 3 must equal 5; if not, test FAILS
+    assert add(2, 3) == 99         # 2 + 3 must equal 5; if not, test FAILS
 
 def test_subtract():
     assert subtract(10, 4) == 6    # 10 - 4 must equal 6
