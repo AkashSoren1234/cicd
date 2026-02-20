@@ -3,7 +3,17 @@
 # It defines your CI/CD pipeline.
 
 stages:          # defines the ordered list of stages in the pipeline
-  - test         # we only have one stage; you could add "build", "deploy", etc.
+  - lint         # stage 1: check code style
+  - test         # stage 2: run tests (only runs if lint passes)
+
+run-lint:                   # name of this job
+  stage: lint               # this job runs in the "lint" stage
+  image: python:3.11-slim   # same Docker image with Python
+  script:
+    - pip install flake8     # flake8 is a code style checker
+    - flake8 calculator.py --max-line-length=100
+    # ↑ checks calculator.py for style issues (unused imports, bad formatting, etc.)
+    # --max-line-length=100 allows lines up to 100 characters (default is 79)
 
 run-tests:                  # name of this job — you can call it anything
   stage: test               # this job runs in the "test" stage
